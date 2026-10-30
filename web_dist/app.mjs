@@ -644,6 +644,13 @@ function wireUI() {
   $('restart').onclick = () => { episode++; resetEpisode(); setRunning(running); };
   $('seed').onchange = () => { resetEpisode(true); setRunning(running); };
   $('ghost').onchange = () => { $('ghost-legend').hidden = !$('ghost').checked; drawScene(); };
+  $('about-button').onclick = () => $('about').showModal();
+  $('close-about').onclick = () => $('about').close();
+  $('about').addEventListener('click', event => {
+    if (event.target !== $('about')) return;
+    const r = $('about').getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) $('about').close();
+  });
   $('help').onclick = () => $('guide').showModal();
   $('close-help').onclick = () => $('guide').close();
   $('guide').addEventListener('click', event => { if (event.target === $('guide')) { const r = $('guide').getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) $('guide').close(); } });
@@ -703,7 +710,7 @@ function wireUI() {
     finally { if (version === environmentVersion) { button.disabled = false; button.textContent = 'Compare 20 episodes ↗'; } }
   };
   document.addEventListener('keydown', e => {
-    if (!model || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) || $('guide').open) return;
+    if (!model || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) || $('guide').open || $('about').open) return;
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); }
     if (e.code === 'Space' && e.target === document.body) { e.preventDefault(); $('play').click(); }
   });

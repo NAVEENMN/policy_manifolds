@@ -4,13 +4,13 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#171b1a">
   <meta name="description" content="Reshape a trained KAN policy with draggable spline control points and watch Classic Control, Box2D, and MuJoCo agents respond live.">
-  <title>Policy Manifolds · Interactive Policy Lab</title>
+  <title>Policy Manifolds · Interactive Reinforcement Learning π(a|s) lab</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./"><span class="brand-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 23C10 23 8 8 14 8s3 16 9 16 3-15 7-15M3 16h27"/></svg></span><span>Policy Manifolds<small>INTERACTIVE POLICY LAB</small></span></a>
-    <div class="top-actions"><div class="environment-control"><i id="connection-dot" aria-hidden="true"></i><select id="environment-select" aria-label="Choose environment" aria-describedby="connection"><option>Loading environments…</option></select><span id="connection" class="sr-only" role="status">Loading checkpoint</span></div><button id="help" class="quiet">How to use <span>?</span></button><button id="export" class="quiet" disabled>Export edits ↗</button></div>
+    <a class="brand" href="./"><span class="brand-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 23C10 23 8 8 14 8s3 16 9 16 3-15 7-15M3 16h27"/></svg></span><span>Policy Manifolds<small>Interactive Reinforcement Learning <span class="policy-notation" aria-label="pi of a given s">π(a|s)</span> lab</small></span></a>
+    <div class="top-actions"><div class="environment-control"><i id="connection-dot" aria-hidden="true"></i><select id="environment-select" aria-label="Choose environment" aria-describedby="connection"><option>Loading environments…</option></select><span id="connection" class="sr-only" role="status">Loading checkpoint</span></div><button id="about-button" class="quiet" aria-haspopup="dialog" aria-controls="about">What is this?</button><button id="help" class="quiet">How to use <span>?</span></button><button id="export" class="quiet" disabled>Export edits ↗</button><a id="github-link" class="quiet" href="https://github.com/NAVEENMN/policy_manifolds.git" target="_blank" rel="noopener noreferrer">Reproduce my work 🔗</a></div>
   </header>
   <div class="app-shell">
     <aside class="network-panel" aria-label="KAN policy neural network">
@@ -28,7 +28,7 @@
       </div>
     </aside>
     <main>
-      <div class="main-heading"><div><div class="eyebrow">INTERACTIVE POLICY LAB</div><h1>Change an edge in the neural network.<br><span>See how the agent’s behavior changes.</span></h1></div><div class="policy-summary"><span class="chip" id="environment-chip">CartPole-v1</span><div class="algorithm-summary"><span class="eyebrow">TRAINING ALGORITHM</span><strong id="algorithm-name" aria-live="polite">PPO — Proximal Policy Optimization</strong></div></div></div>
+      <div class="main-heading"><div><div class="eyebrow">Interactive Reinforcement Learning <span class="policy-notation" aria-label="pi of a given s">π(a|s)</span> lab</div><h1>Change an edge in the neural network.<br><span>See how the RL agent's behavior changes.</span></h1></div><div class="policy-summary"><span class="chip" id="environment-chip">CartPole-v1</span><div class="algorithm-summary"><span class="eyebrow">TRAINING ALGORITHM</span><strong id="algorithm-name" aria-live="polite">PPO — Proximal Policy Optimization</strong></div></div></div>
       <section id="saved-result" class="saved-result" hidden aria-label="Saved model evaluation"><div><strong id="saved-status"></strong><span id="saved-score"></span></div><p id="saved-detail"></p></section>
       <section id="runtime-notice" class="runtime-notice" hidden role="status"><strong id="runtime-title">Simulation</strong><p id="runtime-detail"></p><button id="retry-runtime" class="quiet">Retry connection</button></section>
       <section id="missing-policy" class="missing-policy" hidden aria-live="polite">
@@ -72,6 +72,25 @@
     </aside>
   </div>
   <div id="toast" role="status" hidden></div>
+  <dialog id="about" aria-labelledby="about-title" aria-describedby="about-intro">
+    <button id="close-about" class="close" aria-label="Close explanation" autofocus>×</button>
+    <div class="eyebrow">UNDERSTAND THE POLICY</div>
+    <h2 id="about-title">What is Policy Manifolds?</h2>
+    <p id="about-intro">An interactive reinforcement learning lab where you can inspect a trained policy, reshape its learned functions, and watch the agent respond.</p>
+    <p class="policy-definition"><strong class="policy-notation" aria-label="pi of a given s">π(a|s)</strong> describes an agent’s policy: how it chooses an action <em>a</em> given its current state <em>s</em>.</p>
+    <div class="architecture-comparison">
+      <section aria-labelledby="mlp-title"><h3 id="mlp-title">In a regular MLP</h3><p>Each edge scales an input by a learned weight. Neurons combine their inputs, then apply nonlinear activation functions such as ReLU or sigmoid.</p></section>
+      <section aria-labelledby="kan-title"><h3 id="kan-title">In a B-spline KAN</h3><p>Each edge applies a learned function. B-spline coefficients shape that function, and each node sums its incoming edge outputs. Here, an edge combines a B-spline with a weighted SiLU term.</p></section>
+    </div>
+    <p>Policy Manifolds trains KAN policies with reinforcement learning, then exposes their learned curves for inspection and editing.</p>
+    <ol class="about-benefits">
+      <li><strong>Compact neural networks.</strong> Explore how few parameters a policy needs to perform well. The app shows each saved model’s size and evaluation results; compactness depends on the task.</li>
+      <li><strong>Control through curve editing.</strong> Move a spline control point and the next action uses the edited function. Observe changes in behavior immediately, without retraining.</li>
+      <li><strong>Mechanistic interpretability.</strong> Inspect how inputs flow through edge functions, then intervene on a curve to test its role in a decision. Compare with the original policy from the same starting state.</li>
+    </ol>
+    <p class="about-context">A visible curve is a starting point for understanding, not a complete explanation. Behavior depends on the whole network and the environment; paired episode comparisons help test an interpretation.</p>
+    <p class="about-source">Architecture background: <a href="https://arxiv.org/abs/2404.19756" target="_blank" rel="noopener noreferrer">KAN: Kolmogorov–Arnold Networks ↗</a></p>
+  </dialog>
   <dialog id="guide"><button id="close-help" class="close" aria-label="Close guide">×</button><div class="eyebrow">A HANDS-ON EXPERIMENT</div><h2>Reshape a decision.</h2><ol><li>Choose <strong>an environment with a saved policy</strong> from the dropdown in the top bar, then press <strong>Run policy</strong>.</li><li>Select an edge in the network or one of the curve cards.</li><li>Drag a diamond up or down. You are changing a real spline coefficient; the next action uses the new curve.</li><li>Watch the simulation, next action, and progress trace. The dashed ghost keeps the original policy.</li><li>Use <strong>Restart</strong> for the same starting state, <strong>Undo</strong> to reverse an edit, or <strong>Restore trained policy</strong> to reset everything.</li></ol><p>Try a middle control point on an angle or velocity edge. CartPole chooses between two pushes; Pendulum applies continuous torque. Acrobot and MountainCar choose among three actions. Use “Compare 20 episodes” for a broader comparison.</p><p class="muted">The checkpoint’s actor runs in your browser. Classic Control physics runs in the browser; Box2D and MuJoCo use the local Python server. Larger networks have an input-group selector, and every actuator has its own control indicator. Saved evaluation badges distinguish target-passing, below-target, and incomplete runs. Each environment loads its own saved actor; Pendulum normalizes angular velocity by 8 and maps its action head through tanh to ±2 N·m. InvertedPendulum uses its saved observation normalization and continuous cart controls from −3 to +3. The action head stays fixed. Diamonds edit B-spline coefficients at fixed x positions; these are not Bézier tangent handles.</p></dialog>
   <script type="module" src="./app.mjs"></script>
 </body>
