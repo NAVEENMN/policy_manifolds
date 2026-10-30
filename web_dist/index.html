@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171b1a">
+  <meta name="description" content="Reshape a trained KAN policy with draggable spline control points and watch Classic Control, Box2D, and MuJoCo agents respond live.">
+  <title>Policy Manifolds · Interactive Policy Lab</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="brand-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 23C10 23 8 8 14 8s3 16 9 16 3-15 7-15M3 16h27"/></svg></span><span>Policy Manifolds<small>INTERACTIVE POLICY LAB</small></span></a>
+    <div class="top-actions"><div class="environment-control"><i id="connection-dot" aria-hidden="true"></i><select id="environment-select" aria-label="Choose environment" aria-describedby="connection"><option>Loading environments…</option></select><span id="connection" class="sr-only" role="status">Loading checkpoint</span></div><button id="help" class="quiet">How to use <span>?</span></button><button id="export" class="quiet" disabled>Export edits ↗</button></div>
+  </header>
+  <div class="app-shell">
+    <aside class="network-panel" aria-label="KAN policy neural network">
+      <div id="network-empty" class="empty-note" hidden>Select a saved policy to inspect its network and edge curves.</div>
+      <div id="network-content">
+      <div class="eyebrow">THE POLICY</div><h2>KAN Policy<br>Neural Networks</h2>
+      <div class="architecture" id="architecture">4 <span>→</span> 2 <span>→</span> 2</div>
+      <p class="muted intro" id="network-intro">12 learned edge curves.<br>Click a connection to edit it.</p>
+      <svg id="network" viewBox="0 0 224 270" aria-label="Interactive 4 to 2 to 2 actor network"></svg>
+      <div id="network-key" class="network-key"><span>State</span><span>Hidden</span><span>Latent</span></div>
+      <div class="separator"></div><div class="eyebrow">LIVE OBSERVATION</div>
+      <div id="observations" class="observations"></div>
+      <div class="model-note"><span class="eyebrow">TRAINED ACTOR</span><strong id="parameter-count">114 parameters</strong><p id="model-description">Two KAN layers feed a fixed linear action head. The critic is unused during playback.</p><code id="checkpoint-hash"></code></div>
+      <button id="import" class="quiet full">Import edits ↙</button><input id="import-file" type="file" accept=".json,application/json" hidden>
+      </div>
+    </aside>
+    <main>
+      <div class="main-heading"><div><div class="eyebrow">INTERACTIVE POLICY LAB</div><h1>Change an edge in the neural network.<br><span>See how the agent’s behavior changes.</span></h1></div><div class="policy-summary"><span class="chip" id="environment-chip">CartPole-v1</span><div class="algorithm-summary"><span class="eyebrow">TRAINING ALGORITHM</span><strong id="algorithm-name" aria-live="polite">PPO — Proximal Policy Optimization</strong></div></div></div>
+      <section id="saved-result" class="saved-result" hidden aria-label="Saved model evaluation"><div><strong id="saved-status"></strong><span id="saved-score"></span></div><p id="saved-detail"></p></section>
+      <section id="runtime-notice" class="runtime-notice" hidden role="status"><strong id="runtime-title">Simulation</strong><p id="runtime-detail"></p><button id="retry-runtime" class="quiet">Retry connection</button></section>
+      <section id="missing-policy" class="missing-policy" hidden aria-live="polite">
+        <span class="empty-icon" id="missing-icon" aria-hidden="true">⌁</span>
+        <div class="eyebrow" id="policy-load-status">ENVIRONMENT READY</div><h2 id="missing-title">Load a saved policy</h2>
+        <p id="missing-description"></p><p id="missing-detail">The trained model is not in this local app yet. Load its exported actor JSON to run the simulation and edit its curves.</p>
+        <button id="load-policy" class="primary">Load actor JSON ↗</button>
+        <button id="retry-policy" class="quiet">Retry saved model</button>
+        <small id="policy-file-hint">Use the saved actor from your training run.</small>
+      </section>
+      <input id="policy-file" type="file" accept=".json,application/json" hidden>
+      <div id="policy-content">
+      <section id="simulation" class="simulation" aria-label="Live CartPole simulation">
+        <div class="simulation-heading"><div><i id="run-dot" class="dot"></i><span id="run-status">Ready</span></div><span id="episode-label">Episode 01</span></div>
+        <div class="scene-wrap"><canvas id="scene" aria-label="CartPole animation showing the edited policy and original policy ghost"></canvas><div id="scene-message" class="scene-message" hidden></div><div class="scene-legend"><span><i class="swatch edited"></i>Live policy</span><span id="ghost-legend"><i class="swatch baseline"></i>Original policy</span></div></div>
+        <div class="score-row"><div><span>LIVE REWARD</span><strong id="reward">0<small> / 500</small></strong></div><div><span>ORIGINAL REWARD</span><strong id="baseline-reward">0<small> / 500</small></strong></div><div><span id="angle-label">POLE ANGLE</span><strong id="angle">0.0<small>°</small></strong></div></div>
+        <div class="playback"><button id="play" class="primary" disabled>▶ Run policy</button><button id="step" title="Advance one physics step" disabled>Step</button><button id="restart" title="Restart both policies from the same initial state" disabled>↻ Restart</button><label class="speed-label">Speed <select id="speed" aria-label="Playback speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label></div>
+      </section>
+      <div class="experiment-options"><label><input id="ghost" type="checkbox" checked> Original policy ghost</label><label><input id="auto-reset" type="checkbox" checked> Auto restart</label><label>Reset seed <input id="seed" type="number" min="0" max="4294967295" step="1" value="42" aria-label="Reset seed"></label></div>
+      <section class="telemetry"><div class="section-heading"><h3 id="history-title">Balance over time</h3><div class="legend"><span class="mint">Live</span><span>Original</span><span class="muted" id="angle-limit">±12° limit</span></div></div><canvas id="history" aria-label="Pole angle over time for the live and original policies"></canvas><div class="chart-caption"><span id="angle-caption">Pole angle · degrees</span><span id="episode-duration">500 steps / episode</span></div></section>
+      <section class="decision"><div class="section-heading"><h3>Next action</h3><span id="decision-comparison">Original agrees</span></div><div id="binary-labels" class="prob-labels"><span><span id="action-left-label">← Push left</span> <b id="prob-left">50%</b></span><span><b id="prob-right">50%</b> <span id="action-right-label">Push right →</span></span></div><div class="prob-track" id="action-track"><div id="prob-fill"></div><i id="baseline-prob" title="Original policy probability at the current live state"></i></div><div id="multi-actions" class="multi-actions" hidden></div><p id="action-description">Probabilities at the live state. The higher one determines the next push.</p></section>
+      <div class="bottom-note"><span id="last-result">Drag a control point while the policy runs.</span><button id="evaluate" class="quiet" disabled>Compare 20 episodes ↗</button></div><div id="evaluation-result" class="evaluation-result" role="status" hidden></div>
+      </div>
+    </main>
+    <aside class="editor-panel" aria-label="Curve editor">
+      <div id="editor-empty" class="editor-empty" hidden><div class="eyebrow">INTERVENE</div><h2>Your policy, one curve at a time.</h2><p>The saved network’s edge curves appear here once its actor is loaded.</p></div>
+      <div id="editor-content">
+      <div class="panel-heading"><div><div class="eyebrow">INTERVENE</div><h2>Shape the policy</h2></div><span class="edit-count" id="edit-count">0 edited</span></div>
+      <p class="panel-intro">Drag a spline control point. The next action uses your edit immediately.</p>
+      <div class="editor-heading"><div><span class="eyebrow" id="edge-layer">LAYER 1 · STATE → HIDDEN</span><h3 id="edge-title">Pole angle → h₁</h3></div><button id="fit" class="quiet" title="Fit axes to the selected curve">Fit view</button></div>
+      <div class="curve-wrap"><svg id="curve-editor" viewBox="0 0 480 280" role="group" aria-label="Spline curve editor with draggable control points"></svg></div>
+      <div class="editor-legend"><span><i class="line mint-line"></i>Live curve</span><span><i class="line dashed"></i>Original</span><span><i class="diamond"></i>Control points</span></div>
+      <p class="control-hint">Drag diamonds vertically · click a point for exact values.<br>Fixed knot positions preserve the trained spline basis.</p>
+      <div class="point-controls"><label>Point <select id="point" aria-label="Control point"></select></label><label>Coefficient <input id="coefficient" aria-label="Spline coefficient" type="number" min="-50" max="50" step="0.05"></label><label>Residual weight <input id="residual" aria-label="SiLU residual weight" type="number" min="-50" max="50" step="0.05"></label></div>
+      <div class="editor-tools"><button id="undo" disabled title="Undo (⌘/Ctrl Z)">↶ Undo</button><button id="redo" disabled title="Redo (⌘/Ctrl Shift Z)">↷ Redo</button><button id="reset-edge">Reset edge</button><button id="zero-edge" title="Set both the spline and residual contribution to zero">Zero edge</button></div>
+      <div class="curves-heading"><h3>All edge curves</h3><span>Click to inspect</span></div>
+      <label id="input-page-control" class="input-page-control" hidden>Browse network inputs <select id="input-page" aria-label="Network input group"></select></label>
+      <div id="edge-layers"></div>
+      <div class="editor-footer"><button id="reset-all" class="reset-all">↻ Restore trained policy</button><details><summary>What am I editing?</summary><p>Each edge computes a cubic B-spline plus a weighted SiLU residual. Diamonds are the spline coefficients, not points the curve must pass through. The curve includes both terms. Each node sums its incoming edges.</p><p>The mint dot shows the edge’s current input and output. A dashed curve is the untouched checkpoint. Edits affect the live actor only, stay in this browser session, and are never written over your checkpoint. Switching environments preserves edits until the page is reloaded.</p><p>The original ghost starts from the same state and follows its own policy. Restart to compare a full episode from identical initial conditions. Reset seeds are reproducible within this app.</p></details></div>
+      </div>
+    </aside>
+  </div>
+  <div id="toast" role="status" hidden></div>
+  <dialog id="guide"><button id="close-help" class="close" aria-label="Close guide">×</button><div class="eyebrow">A HANDS-ON EXPERIMENT</div><h2>Reshape a decision.</h2><ol><li>Choose <strong>an environment with a saved policy</strong> from the dropdown in the top bar, then press <strong>Run policy</strong>.</li><li>Select an edge in the network or one of the curve cards.</li><li>Drag a diamond up or down. You are changing a real spline coefficient; the next action uses the new curve.</li><li>Watch the simulation, next action, and progress trace. The dashed ghost keeps the original policy.</li><li>Use <strong>Restart</strong> for the same starting state, <strong>Undo</strong> to reverse an edit, or <strong>Restore trained policy</strong> to reset everything.</li></ol><p>Try a middle control point on an angle or velocity edge. CartPole chooses between two pushes; Pendulum applies continuous torque. Acrobot and MountainCar choose among three actions. Use “Compare 20 episodes” for a broader comparison.</p><p class="muted">The checkpoint’s actor runs in your browser. Classic Control physics runs in the browser; Box2D and MuJoCo use the local Python server. Larger networks have an input-group selector, and every actuator has its own control indicator. Saved evaluation badges distinguish target-passing, below-target, and incomplete runs. Each environment loads its own saved actor; Pendulum normalizes angular velocity by 8 and maps its action head through tanh to ±2 N·m. InvertedPendulum uses its saved observation normalization and continuous cart controls from −3 to +3. The action head stays fixed. Diamonds edit B-spline coefficients at fixed x positions; these are not Bézier tangent handles.</p></dialog>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

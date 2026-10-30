@@ -1,0 +1,254 @@
+{
+  "format": "inkan-research-actor-v1",
+  "environment": "Swimmer-v5",
+  "architecture": [
+    8,
+    1,
+    1
+  ],
+  "basis": "cubic_uniform_b_spline_plus_silu",
+  "observation_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5"
+  ],
+  "kan_input_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5"
+  ],
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2"
+  ],
+  "environment_metadata": {
+    "environment": "Swimmer-v5",
+    "observation_shape": [
+      8
+    ],
+    "observation_dtype": "float64",
+    "observation_labels": [
+      "qpos feature 1",
+      "qpos feature 2",
+      "qpos feature 3",
+      "qvel feature 1",
+      "qvel feature 2",
+      "qvel feature 3",
+      "qvel feature 4",
+      "qvel feature 5"
+    ],
+    "observation_structure": {
+      "skipped_qpos": 2,
+      "qpos": 3,
+      "qvel": 5
+    },
+    "action_labels": [
+      "Actuator 1",
+      "Actuator 2"
+    ],
+    "action_space": "Box(-1.0, 1.0, (2,), float32)",
+    "action_dimension": 2,
+    "max_episode_steps": 1000,
+    "gym_reward_threshold": 360.0,
+    "action_low": [
+      -1.0,
+      -1.0
+    ],
+    "action_high": [
+      1.0,
+      1.0
+    ],
+    "simulation_dt": 0.04,
+    "frame_skip": 4,
+    "mujoco_xml": "swimmer.xml",
+    "mujoco_xml_sha256": "25b0d46bf5522920fea6a579353aee39d391ad9e2a0574b53f83704c11b21b12",
+    "target": 360.0
+  },
+  "preprocessing_order": [
+    "running_observation_normalization_if_present",
+    "fixed_observation_scale_or_image_encoder",
+    "kan_layers",
+    "linear_head",
+    "action_mapping"
+  ],
+  "parameters": {
+    "actor_parameters": 49,
+    "kan_parameters": 45,
+    "head_parameters": 4,
+    "encoder_parameters": 0,
+    "actor_training_parameters": 53,
+    "training_parameters": 275513
+  },
+  "layers": [
+    {
+      "inputs": 8,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            -9.20404052734375,
+            -0.09477736800909042,
+            1.5752123594284058,
+            -3.3814010620117188
+          ],
+          [
+            5.675836086273193,
+            -0.9511991739273071,
+            -0.19063979387283325,
+            -0.6002097725868225
+          ],
+          [
+            -3.158280611038208,
+            -0.6551543474197388,
+            -0.18503528833389282,
+            1.5000683069229126
+          ],
+          [
+            -1.210463523864746,
+            0.27743902802467346,
+            0.9935557246208191,
+            -0.3277807831764221
+          ],
+          [
+            -0.3571889102458954,
+            -0.36747708916664124,
+            0.4458563029766083,
+            -3.3385393619537354
+          ],
+          [
+            -0.5992240905761719,
+            -0.6914743185043335,
+            0.7998901009559631,
+            0.6162673830986023
+          ],
+          [
+            -1.5754157304763794,
+            -0.27861419320106506,
+            0.9201276302337646,
+            0.19172438979148865
+          ],
+          [
+            2.53650164604187,
+            -0.6633566617965698,
+            -0.10560766607522964,
+            -0.02941123954951763
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          -2.628190040588379,
+          -0.3197467625141144,
+          0.8301549553871155,
+          0.3474540710449219,
+          -1.156796932220459,
+          0.02835497073829174,
+          0.36004242300987244,
+          0.7604599595069885
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    },
+    {
+      "inputs": 1,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            0.1349761039018631,
+            -1.6040514707565308,
+            2.7432830333709717,
+            -5.115415096282959
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          1.600460171699524
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    }
+  ],
+  "head": {
+    "weight": [
+      [
+        -0.33885490894317627
+      ],
+      [
+        -2.3798928260803223
+      ]
+    ],
+    "bias": [
+      -1.4576430320739746,
+      0.3118484914302826
+    ]
+  },
+  "action_mapping": "tanh_then_box_rescale",
+  "observation_scale": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "image_encoder_required": false,
+  "action_low": [
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0
+  ],
+  "observation_normalization": {
+    "mean": [
+      2.1475158637159324,
+      -1.5316218881780652,
+      -0.7141006550827067,
+      0.039012648172661896,
+      0.0002266118959230579,
+      0.05919951751181331,
+      -0.037374062572719184,
+      -0.01446071410388261
+    ],
+    "var": [
+      1.2884991428526564,
+      0.6165707644607223,
+      0.38354091020313014,
+      0.032379439119734406,
+      0.07115131702491558,
+      0.1676134690180965,
+      0.22113147549216505,
+      0.893606156005528
+    ],
+    "epsilon": 1e-08,
+    "clip": 10.0
+  },
+  "checkpoint_sha256": "5bbc53c633a6193fc27ec0554381c27be88a1e57191e4bf3d1d9596c4b7a92b4",
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 51.001734317938016,
+    "score_label": "100 validation episodes",
+    "target": 360.0,
+    "detail": "Selected a1-1_g1_s0_attempt001; 1,000,000 training steps."
+  }
+}

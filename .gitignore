@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Terraform
+deployment/.terraform/
+deployment/.terraform.lock.hcl
+deployment/terraform.tfstate
+deployment/terraform.tfstate.backup
+*.tfvars
+
+# Keys and secrets
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files (models stored via Git LFS or downloaded separately)
+*.zip
+*.pkl
+*.pt
+*.npz
+
+# Logs
+*.log

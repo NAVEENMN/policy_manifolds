@@ -1,0 +1,3 @@
+# Complete app + training + simulation environment.
+# Install SWIG first: venv/bin/python -m pip install 'swig==4.*'
+-r policy-manifolds/requirements.txt

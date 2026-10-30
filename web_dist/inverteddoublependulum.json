@@ -1,0 +1,230 @@
+{
+  "format": "inkan-research-actor-v1",
+  "environment": "InvertedDoublePendulum-v5",
+  "architecture": [
+    9,
+    1
+  ],
+  "basis": "cubic_uniform_b_spline_plus_silu",
+  "observation_labels": [
+    "Cart position",
+    "sin(angle 1)",
+    "sin(angle 2)",
+    "cos(angle 1)",
+    "cos(angle 2)",
+    "Cart velocity (clipped)",
+    "Angular velocity 1 (clipped)",
+    "Angular velocity 2 (clipped)",
+    "Cart constraint force (clipped)"
+  ],
+  "kan_input_labels": [
+    "Cart position",
+    "sin(angle 1)",
+    "sin(angle 2)",
+    "cos(angle 1)",
+    "cos(angle 2)",
+    "Cart velocity (clipped)",
+    "Angular velocity 1 (clipped)",
+    "Angular velocity 2 (clipped)",
+    "Cart constraint force (clipped)"
+  ],
+  "action_labels": [
+    "slide"
+  ],
+  "environment_metadata": {
+    "environment": "InvertedDoublePendulum-v5",
+    "observation_shape": [
+      9
+    ],
+    "observation_dtype": "float64",
+    "observation_labels": [
+      "Cart position",
+      "sin(angle 1)",
+      "sin(angle 2)",
+      "cos(angle 1)",
+      "cos(angle 2)",
+      "Cart velocity (clipped)",
+      "Angular velocity 1 (clipped)",
+      "Angular velocity 2 (clipped)",
+      "Cart constraint force (clipped)"
+    ],
+    "observation_structure": {},
+    "action_labels": [
+      "slide"
+    ],
+    "action_space": "Box(-1.0, 1.0, (1,), float32)",
+    "action_dimension": 1,
+    "max_episode_steps": 1000,
+    "gym_reward_threshold": 9100.0,
+    "action_low": [
+      -1.0
+    ],
+    "action_high": [
+      1.0
+    ],
+    "simulation_dt": 0.05,
+    "frame_skip": 5,
+    "mujoco_xml": "inverted_double_pendulum.xml",
+    "mujoco_xml_sha256": "2b4eadf03bd79a8772abd4c1a626b5755747f841801a694ea9528cc49211ba46",
+    "target": 9100.0
+  },
+  "preprocessing_order": [
+    "running_observation_normalization_if_present",
+    "fixed_observation_scale_or_image_encoder",
+    "kan_layers",
+    "linear_head",
+    "action_mapping"
+  ],
+  "parameters": {
+    "actor_parameters": 47,
+    "kan_parameters": 45,
+    "head_parameters": 2,
+    "encoder_parameters": 0,
+    "actor_training_parameters": 49,
+    "training_parameters": 275509
+  },
+  "layers": [
+    {
+      "inputs": 9,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            -0.13617531955242157,
+            -0.03400261327624321,
+            -0.020275412127375603,
+            0.10474670678377151
+          ],
+          [
+            -0.21526582539081573,
+            -0.20089158415794373,
+            0.15760749578475952,
+            -0.19394025206565857
+          ],
+          [
+            -1.4137928485870361,
+            -0.7209455966949463,
+            0.7199584245681763,
+            1.4216350317001343
+          ],
+          [
+            -0.09161871671676636,
+            0.009068567305803299,
+            -0.06895028799772263,
+            0.12539121508598328
+          ],
+          [
+            -0.039076995104551315,
+            0.2518908679485321,
+            -0.010095981881022453,
+            -0.23634818196296692
+          ],
+          [
+            -0.4733632206916809,
+            -0.12511281669139862,
+            0.08316140621900558,
+            0.5043882727622986
+          ],
+          [
+            -1.3030376434326172,
+            -0.5784667134284973,
+            1.004245638847351,
+            1.4481629133224487
+          ],
+          [
+            -2.395620584487915,
+            -0.48343247175216675,
+            0.8162652850151062,
+            0.6275655031204224
+          ],
+          [
+            -0.014735203236341476,
+            -0.057763002812862396,
+            -0.19996580481529236,
+            -0.1459301859140396
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          -0.005083943717181683,
+          0.13465392589569092,
+          -0.19501322507858276,
+          0.08143296092748642,
+          -0.2914428114891052,
+          -0.05380556732416153,
+          0.12287572771310806,
+          0.5656065344810486,
+          0.002266567200422287
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    }
+  ],
+  "head": {
+    "weight": [
+      [
+        -1.791953444480896
+      ]
+    ],
+    "bias": [
+      0.32580235600471497
+    ]
+  },
+  "action_mapping": "tanh_then_box_rescale",
+  "observation_scale": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "image_encoder_required": false,
+  "action_low": [
+    -1.0
+  ],
+  "action_high": [
+    1.0
+  ],
+  "observation_normalization": {
+    "mean": [
+      -0.12349091969539605,
+      -0.0010869400620923916,
+      0.0008274552997317521,
+      0.9943966776532644,
+      0.9931700510399732,
+      -0.006075071125712737,
+      -0.003920907166350392,
+      0.0066437416132643,
+      0.000682788680900546
+    ],
+    "var": [
+      0.046259350236863,
+      0.010539647999940612,
+      0.011926855211357414,
+      0.0006344185335041303,
+      0.0016857103236225081,
+      0.49342541329059053,
+      1.6253615324814177,
+      2.295690040614676,
+      0.4379274048645644
+    ],
+    "epsilon": 1e-08,
+    "clip": 10.0
+  },
+  "checkpoint_sha256": "8b2b80ba6ae7c631f942cb89444ee6db3c785c404175d9d7488b43f8d410a244",
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Held-out target met",
+    "score": 9359.838035421371,
+    "score_label": "100 held-out episodes",
+    "target": 9100.0,
+    "detail": "Selected a1_g1_s0_attempt001; 500,000 training steps."
+  }
+}

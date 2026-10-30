@@ -1,0 +1,163 @@
+{
+  "format": "inkan-research-actor-v1",
+  "environment": "InvertedPendulum-v5",
+  "architecture": [
+    4,
+    1
+  ],
+  "basis": "cubic_uniform_b_spline_plus_silu",
+  "observation_labels": [
+    "Cart position",
+    "Pole angle",
+    "Cart velocity",
+    "Pole angular velocity"
+  ],
+  "kan_input_labels": [
+    "Cart position",
+    "Pole angle",
+    "Cart velocity",
+    "Pole angular velocity"
+  ],
+  "action_labels": [
+    "slide"
+  ],
+  "environment_metadata": {
+    "environment": "InvertedPendulum-v5",
+    "observation_shape": [
+      4
+    ],
+    "observation_dtype": "float64",
+    "observation_labels": [
+      "Cart position",
+      "Pole angle",
+      "Cart velocity",
+      "Pole angular velocity"
+    ],
+    "observation_structure": {
+      "qpos": 2,
+      "qvel": 2
+    },
+    "action_labels": [
+      "slide"
+    ],
+    "action_space": "Box(-3.0, 3.0, (1,), float32)",
+    "action_dimension": 1,
+    "max_episode_steps": 1000,
+    "gym_reward_threshold": 950.0,
+    "action_low": [
+      -3.0
+    ],
+    "action_high": [
+      3.0
+    ],
+    "simulation_dt": 0.04,
+    "frame_skip": 2,
+    "mujoco_xml": "inverted_pendulum.xml",
+    "mujoco_xml_sha256": "80910a9af85cd47072be82d6f92c5e6a115d0eecc3eb464e58542b285c89fb7f",
+    "target": 950.0
+  },
+  "preprocessing_order": [
+    "running_observation_normalization_if_present",
+    "fixed_observation_scale_or_image_encoder",
+    "kan_layers",
+    "linear_head",
+    "action_mapping"
+  ],
+  "parameters": {
+    "actor_parameters": 22,
+    "kan_parameters": 20,
+    "head_parameters": 2,
+    "encoder_parameters": 0,
+    "actor_training_parameters": 24,
+    "training_parameters": 270364
+  },
+  "layers": [
+    {
+      "inputs": 4,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            -0.32928577065467834,
+            -0.24056817591190338,
+            -0.053271934390068054,
+            0.5679901838302612
+          ],
+          [
+            -1.237053394317627,
+            0.007442874368280172,
+            0.19676069915294647,
+            0.3981533348560333
+          ],
+          [
+            -1.0279242992401123,
+            -0.7528896331787109,
+            0.4576926529407501,
+            0.487017422914505
+          ],
+          [
+            -2.3520476818084717,
+            -0.2915600538253784,
+            0.793597400188446,
+            0.466341495513916
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          -0.10569090396165848,
+          0.21709468960762024,
+          0.12150944024324417,
+          0.502209484577179
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    }
+  ],
+  "head": {
+    "weight": [
+      [
+        1.9346972703933716
+      ]
+    ],
+    "bias": [
+      0.033458881080150604
+    ]
+  },
+  "action_mapping": "tanh_then_box_rescale",
+  "observation_scale": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "image_encoder_required": false,
+  "action_low": [
+    -3.0
+  ],
+  "action_high": [
+    3.0
+  ],
+  "observation_normalization": {
+    "mean": [
+      -0.2898704646716569,
+      -0.001831064427065193,
+      -0.024213865413149894,
+      0.00031174980073937596
+    ],
+    "var": [
+      0.08060352340384658,
+      0.0025403399680173195,
+      0.203590767090203,
+      0.8946519335623626
+    ],
+    "epsilon": 1e-08,
+    "clip": 10.0
+  },
+  "checkpoint_sha256": "db351d245ad0f121f0ee5ad11c025a8fc99f988f98f7960a0dd0475dec4c8b53",
+  "demo": {
+    "algorithm": "SAC"
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "format": "inkan-research-actor-v1",
+  "environment": "Hopper-v5",
+  "architecture": [
+    11,
+    1,
+    1
+  ],
+  "basis": "cubic_uniform_b_spline_plus_silu",
+  "observation_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qpos feature 4",
+    "qpos feature 5",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5",
+    "qvel feature 6"
+  ],
+  "kan_input_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qpos feature 4",
+    "qpos feature 5",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5",
+    "qvel feature 6"
+  ],
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2",
+    "Actuator 3"
+  ],
+  "environment_metadata": {
+    "environment": "Hopper-v5",
+    "observation_shape": [
+      11
+    ],
+    "observation_dtype": "float64",
+    "observation_labels": [
+      "qpos feature 1",
+      "qpos feature 2",
+      "qpos feature 3",
+      "qpos feature 4",
+      "qpos feature 5",
+      "qvel feature 1",
+      "qvel feature 2",
+      "qvel feature 3",
+      "qvel feature 4",
+      "qvel feature 5",
+      "qvel feature 6"
+    ],
+    "observation_structure": {
+      "skipped_qpos": 1,
+      "qpos": 5,
+      "qvel": 6
+    },
+    "action_labels": [
+      "Actuator 1",
+      "Actuator 2",
+      "Actuator 3"
+    ],
+    "action_space": "Box(-1.0, 1.0, (3,), float32)",
+    "action_dimension": 3,
+    "max_episode_steps": 1000,
+    "gym_reward_threshold": 3800.0,
+    "action_low": [
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "action_high": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "simulation_dt": 0.008,
+    "frame_skip": 4,
+    "mujoco_xml": "hopper.xml",
+    "mujoco_xml_sha256": "3ce93a055ffdcd83c0c701d2400768e40d2cbb9532f3c4ae33377c27f8b39f9e",
+    "target": 3800.0
+  },
+  "preprocessing_order": [
+    "running_observation_normalization_if_present",
+    "fixed_observation_scale_or_image_encoder",
+    "kan_layers",
+    "linear_head",
+    "action_mapping"
+  ],
+  "parameters": {
+    "actor_parameters": 66,
+    "kan_parameters": 60,
+    "head_parameters": 6,
+    "encoder_parameters": 0,
+    "actor_training_parameters": 72,
+    "training_parameters": 279628
+  },
+  "layers": [
+    {
+      "inputs": 11,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            1.008570909500122,
+            0.4058789610862732,
+            0.19499777257442474,
+            -0.07975060492753983
+          ],
+          [
+            1.0330475568771362,
+            -0.8593686819076538,
+            0.26591622829437256,
+            -0.3592357933521271
+          ],
+          [
+            0.23638637363910675,
+            0.6027610301971436,
+            -0.13452772796154022,
+            0.9962813258171082
+          ],
+          [
+            -0.26431751251220703,
+            -0.3752835690975189,
+            -0.43649768829345703,
+            -0.6297751069068909
+          ],
+          [
+            3.256295919418335,
+            -0.2186727672815323,
+            0.44000717997550964,
+            -0.4463750123977661
+          ],
+          [
+            2.0251305103302,
+            0.2549881339073181,
+            0.26410362124443054,
+            -0.19158487021923065
+          ],
+          [
+            1.1439377069473267,
+            0.6080978512763977,
+            0.7148046493530273,
+            -0.38833102583885193
+          ],
+          [
+            -0.38386017084121704,
+            -0.47727635502815247,
+            -0.20708508789539337,
+            0.08221210539340973
+          ],
+          [
+            3.0069992542266846,
+            -0.18162675201892853,
+            0.08969169855117798,
+            -0.13979454338550568
+          ],
+          [
+            -0.5138835906982422,
+            -0.5808184742927551,
+            -0.5429204106330872,
+            -0.25109174847602844
+          ],
+          [
+            1.0466865301132202,
+            0.6002705097198486,
+            0.4465694725513458,
+            0.08706069737672806
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          0.15828244388103485,
+          -0.8236442804336548,
+          0.310690701007843,
+          -0.05050317198038101,
+          -0.2571021616458893,
+          -0.42155900597572327,
+          -0.11157567799091339,
+          -0.3099781572818756,
+          -0.07516898959875107,
+          -0.23594379425048828,
+          -0.25306200981140137
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    },
+    {
+      "inputs": 1,
+      "outputs": 1,
+      "n_bases": 4,
+      "coefficients": [
+        [
+          [
+            7.836714744567871,
+            -0.44494131207466125,
+            -0.08301113545894623,
+            0.6249613761901855
+          ]
+        ]
+      ],
+      "base_weights": [
+        [
+          -1.275788426399231
+        ]
+      ],
+      "grid_start": -7.0,
+      "inv_h": 0.5
+    }
+  ],
+  "head": {
+    "weight": [
+      [
+        -0.3099993169307709
+      ],
+      [
+        -0.6504039764404297
+      ],
+      [
+        -1.7032092809677124
+      ]
+    ],
+    "bias": [
+      -0.09004595875740051,
+      0.43827250599861145,
+      -0.9170796275138855
+    ]
+  },
+  "action_mapping": "tanh_then_box_rescale",
+  "observation_scale": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "image_encoder_required": false,
+  "action_low": [
+    -1.0,
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "observation_normalization": {
+    "mean": [
+      1.1244605673513095,
+      0.022519361522913794,
+      -0.35484850232710075,
+      -0.009805239790662596,
+      0.5389366173604384,
+      1.1656047080703051,
+      -0.6827526934145721,
+      0.13846854560971358,
+      -1.323107717746565,
+      -0.05220866836666034,
+      0.9763967704969063
+    ],
+    "var": [
+      0.02439912195783793,
+      0.004870643101172814,
+      0.08727987562754592,
+      0.0087356646698843,
+      0.07331051186055194,
+      0.5337151883838209,
+      0.5459518868399222,
+      0.36694557923290455,
+      1.037509819478764,
+      0.2719108642669488,
+      2.4178819493354795
+    ],
+    "epsilon": 1e-08,
+    "clip": 10.0
+  },
+  "checkpoint_sha256": "79cded2c03469a8c809f4446ad0f3a56958561b574c152bd6443731e6d84f8a0",
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 1028.3047485595941,
+    "score_label": "100 validation episodes",
+    "target": 3800.0,
+    "detail": "Selected a1-1_g1_s0_attempt001; 1,000,000 training steps."
+  }
+}
