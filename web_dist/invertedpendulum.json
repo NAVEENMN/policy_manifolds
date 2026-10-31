@@ -156,8 +156,5 @@
     "epsilon": 1e-08,
     "clip": 10.0
   },
-  "checkpoint_sha256": "db351d245ad0f121f0ee5ad11c025a8fc99f988f98f7960a0dd0475dec4c8b53",
-  "demo": {
-    "algorithm": "SAC"
-  }
+  "checkpoint_sha256": "db351d245ad0f121f0ee5ad11c025a8fc99f988f98f7960a0dd0475dec4c8b53"
 }

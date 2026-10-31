@@ -1,6 +1,6 @@
 {
   "format": "cartpole-kan-policy-v1",
-  "checkpoint": "model.zip",
+  "checkpoint": "ppo_kan_cartpole_2x2.zip",
   "sha256": "e1d2b906d3b1441f7b38cc4da2f2e690491b9a263da7d897351d6fc876225b45",
   "trainingSteps": 100352,
   "architecture": [
@@ -203,8 +203,5 @@
     "Cart velocity",
     "Pole angle",
     "Pole angular velocity"
-  ],
-  "demo": {
-    "algorithm": "PPO"
-  }
+  ]
 }

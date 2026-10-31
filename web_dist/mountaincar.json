@@ -3401,8 +3401,5 @@
   },
   "training_steps": 301056,
   "checkpoint": "ppo_kan_mountaincar_best.zip",
-  "checkpoint_sha256": "d4bdc86091fb138cc9acdca8ceb2b2194ceb10f333c95bebac4386ab2ddfc146",
-  "demo": {
-    "algorithm": "PPO"
-  }
+  "checkpoint_sha256": "d4bdc86091fb138cc9acdca8ceb2b2194ceb10f333c95bebac4386ab2ddfc146"
 }

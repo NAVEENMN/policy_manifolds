@@ -195,8 +195,5 @@
   },
   "training_steps": 501760,
   "checkpoint": "ppo_kan_acrobot_best.zip",
-  "checkpoint_sha256": "cd3f727b65d65d2c458aadcc8e9c383d08e1ffa881c227d15875ebe19a385638",
-  "demo": {
-    "algorithm": "PPO"
-  }
+  "checkpoint_sha256": "cd3f727b65d65d2c458aadcc8e9c383d08e1ffa881c227d15875ebe19a385638"
 }
