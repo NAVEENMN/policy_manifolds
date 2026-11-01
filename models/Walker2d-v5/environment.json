@@ -1,0 +1,64 @@
+{
+  "environment": "Walker2d-v5",
+  "observation_shape": [
+    17
+  ],
+  "observation_dtype": "float64",
+  "observation_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qpos feature 4",
+    "qpos feature 5",
+    "qpos feature 6",
+    "qpos feature 7",
+    "qpos feature 8",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5",
+    "qvel feature 6",
+    "qvel feature 7",
+    "qvel feature 8",
+    "qvel feature 9"
+  ],
+  "observation_structure": {
+    "skipped_qpos": 1,
+    "qpos": 8,
+    "qvel": 9
+  },
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2",
+    "Actuator 3",
+    "Actuator 4",
+    "Actuator 5",
+    "Actuator 6"
+  ],
+  "action_space": "Box(-1.0, 1.0, (6,), float32)",
+  "action_dimension": 6,
+  "max_episode_steps": 1000,
+  "gym_reward_threshold": null,
+  "action_low": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "simulation_dt": 0.008,
+  "frame_skip": 4,
+  "mujoco_xml": "walker2d_v5.xml",
+  "mujoco_xml_sha256": "6bed53a6cc3ca73c4fe8ac3486d3b4228927264a6454f4ef16d3eed3c58bc09d",
+  "target": 4000.0
+}

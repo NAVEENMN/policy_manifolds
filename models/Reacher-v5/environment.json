@@ -1,0 +1,41 @@
+{
+  "environment": "Reacher-v5",
+  "observation_shape": [
+    10
+  ],
+  "observation_dtype": "float64",
+  "observation_labels": [
+    "cos(angle 1)",
+    "cos(angle 2)",
+    "sin(angle 1)",
+    "sin(angle 2)",
+    "Target x",
+    "Target y",
+    "Angular velocity 1",
+    "Angular velocity 2",
+    "Fingertip minus target x",
+    "Fingertip minus target y"
+  ],
+  "observation_structure": {},
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2"
+  ],
+  "action_space": "Box(-1.0, 1.0, (2,), float32)",
+  "action_dimension": 2,
+  "max_episode_steps": 50,
+  "gym_reward_threshold": -3.75,
+  "action_low": [
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0
+  ],
+  "simulation_dt": 0.02,
+  "frame_skip": 2,
+  "mujoco_xml": "reacher.xml",
+  "mujoco_xml_sha256": "3fabc64fc738326485a8231a9a649f784090a0c3d8215f8d2ccd6038b8e60cc4",
+  "target": -3.75
+}

@@ -1,0 +1,37 @@
+{
+  "environment": "Reacher-v5",
+  "trial": "a2_g1_s1_attempt001",
+  "source": "results/Reacher-v5/trials/a2_g1_s1_attempt001",
+  "architecture": [
+    10,
+    2
+  ],
+  "head_architecture": [
+    2,
+    2
+  ],
+  "actor_parameters": 106,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": -5.746848551733419,
+    "score_label": "100 validation episodes",
+    "target": -3.75,
+    "target_met": false,
+    "trial": "a2_g1_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 1,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target -3.75 \u00b7 seed 1 \u00b7 grid 1 \u00b7 250,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "6bed9c43759bb10374f99b5cd47c0e8c2cc234f1ce36e9f89e0e9e42bff7b101",
+    "best_model.zip": "27d1fdae80e846c2e59139c13bafe001e863f968d8d2338c743da6e6f73dd519",
+    "best_actor.json": "85beae7878b87e557795274ee113d45d32d14c72ba5480e4dec0478fe77b1c38",
+    "best_normalization.pkl": "fdd81efef414f2ed098f9156bfa8b69735c3cbd6e65c4284ffa8a59a660a69de",
+    "best_validation.json": "34c84911292ceee28a3018da014074478dd876c42ac00c6e518097dc4b2688f8",
+    "learning_curve.csv": "3d1690d1bb7127163c75c269e092b1a8ac1b1c385e7326eb4601184881721ddb"
+  }
+}

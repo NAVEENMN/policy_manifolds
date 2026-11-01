@@ -81,7 +81,7 @@ def export_model(environment, source, output):
     return data
 
 
-def prepare_web(models=MODELS, web=WEB, refresh=False):
+def prepare_web(models=MODELS, web=WEB, refresh=False, preserve_bundled=False):
     models, web = Path(models), Path(web); web.mkdir(parents=True, exist_ok=True)
     ready = []
     for environment, spec in ENVIRONMENTS.items():
@@ -101,7 +101,10 @@ def prepare_web(models=MODELS, web=WEB, refresh=False):
             atomic_json(destination, data)
             ready.append(environment)
         elif destination.exists():
-            destination.unlink()  # Do not serve a stale actor from another model collection.
+            if preserve_bundled:
+                ready.append(environment)
+            else:
+                destination.unlink()  # Custom collections must not inherit unrelated actors.
     return ready
 
 

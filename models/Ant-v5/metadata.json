@@ -1,0 +1,37 @@
+{
+  "environment": "Ant-v5",
+  "trial": "a2_g2_s0_attempt001",
+  "source": "results/Ant-v5/trials/a2_g2_s0_attempt001",
+  "architecture": [
+    105,
+    2
+  ],
+  "head_architecture": [
+    2,
+    8
+  ],
+  "actor_parameters": 1284,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 2959.2835350620007,
+    "score_label": "100 validation episodes",
+    "target": 6000.0,
+    "target_met": false,
+    "trial": "a2_g2_s0_attempt001",
+    "training_seed": 0,
+    "grid_size": 2,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target 6000 \u00b7 seed 0 \u00b7 grid 2 \u00b7 1,450,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "59c23bacf85422d0161e8feb7e83ca6e8661ca41b598b908a2c01bfa10be742a",
+    "best_model.zip": "7dd4b72f18aaa853329042de641ec7e1b60862405b25e124dc93575db34f4637",
+    "best_actor.json": "68b2c2416d0b8f8e41f749edf1782d28fb306452e77b08e844506a2ebc4cd291",
+    "best_normalization.pkl": "908df6602aef301bbdc8264d278f332d5de40ee45d6ca4b0977ba8f23252af3e",
+    "best_validation.json": "55e9a13973a7f6168f677d4a9e4340320c7f0d77430d9c664087d68bea8456b9",
+    "learning_curve.csv": "866c58da26965aafda35fd3ac9b0055a36a5e10922340ed1757977dad5f4e9a1"
+  }
+}

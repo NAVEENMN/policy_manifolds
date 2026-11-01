@@ -2,7 +2,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = ROOT / 'models'
-WEB = ROOT / 'web/dist'
+WEB = ROOT / 'web_dist'
 ENVIRONMENTS = {
     'CartPole-v1': {'algorithm': 'PPO', 'widths': [2, 2], 'grid': 5, 'steps': 100_000, 'target': 499., 'file': 'model.json'},
     'Pendulum-v1': {'algorithm': 'SAC', 'widths': [1, 1], 'grid': 2, 'steps': 100_000, 'target': -200., 'file': 'pendulum.json'},

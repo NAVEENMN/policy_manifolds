@@ -642,12 +642,20 @@
     "epsilon": 1e-08,
     "clip": 10.0
   },
+  "checkpoint_sha256": "175487058012c2ffc53524612fe5b303eab4161ad14b5e7b67f34289184f9a26",
   "demo": {
     "algorithm": "SAC",
-    "status": "Below target",
-    "score": 1153.7467916357518,
+    "status": "Target met \u00b7 one training seed",
+    "score": 4204.461989552975,
     "score_label": "100 validation episodes",
     "target": 4000.0,
-    "detail": "Selected a1_g1_s0_attempt001; 2,000,000 training steps."
+    "target_met": true,
+    "trial": "a2_g5_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 5,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 1,
+    "detail": "Target 4000 \u00b7 seed 1 \u00b7 grid 5 \u00b7 1,950,000 checkpoint steps. 1/3 training seeds passed at this grid. Not reliably solved across seeds.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
   }
 }

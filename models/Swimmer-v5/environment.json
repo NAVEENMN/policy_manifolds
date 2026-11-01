@@ -1,0 +1,43 @@
+{
+  "environment": "Swimmer-v5",
+  "observation_shape": [
+    8
+  ],
+  "observation_dtype": "float64",
+  "observation_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5"
+  ],
+  "observation_structure": {
+    "skipped_qpos": 2,
+    "qpos": 3,
+    "qvel": 5
+  },
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2"
+  ],
+  "action_space": "Box(-1.0, 1.0, (2,), float32)",
+  "action_dimension": 2,
+  "max_episode_steps": 1000,
+  "gym_reward_threshold": 360.0,
+  "action_low": [
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0
+  ],
+  "simulation_dt": 0.04,
+  "frame_skip": 4,
+  "mujoco_xml": "swimmer.xml",
+  "mujoco_xml_sha256": "25b0d46bf5522920fea6a579353aee39d391ad9e2a0574b53f83704c11b21b12",
+  "target": 360.0
+}

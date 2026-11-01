@@ -830,7 +830,12 @@ async function switchEnvironment(id, force = false) {
   $('saved-status').textContent = demo?.status || '';
   $('saved-score').textContent = Number.isFinite(demo?.score) ? `${demo.score.toFixed(2)} return · ${demo.score_label}` : '';
   $('saved-detail').textContent = demo?.detail || '';
-  $('saved-result').dataset.status = demo?.status?.includes('met') ? 'met' : 'research';
+  $('saved-result').dataset.status = (demo?.target_met ?? demo?.status?.includes('met')) ? 'met' : 'research';
+  $('saved-provenance').hidden = !demo?.trial;
+  $('saved-provenance').open = false;
+  $('saved-trial').textContent = demo?.trial ? `Checkpoint: ${demo.trial}` : '';
+  if (demo?.trial) $('learning-curve-link').href = `results/${env.id}-learning-curve.csv`;
+  else $('learning-curve-link').removeAttribute('href');
   const saved = sessions.get(id);
   model = saved?.model ?? clone(original); undoStack = saved?.undoStack ?? []; redoStack = saved?.redoStack ?? [];
   selected = saved?.selected ?? {l: 0, i: Math.min(id === 'pendulum' || env.remote ? 1 : 2, model.layers[0].inputs - 1), o: 0};
@@ -838,11 +843,13 @@ async function switchEnvironment(id, force = false) {
   resetSeed = saved?.seed ?? 42; $('seed').value = String(resetSeed);
   edges = allEdges(model); episode = 1;
   $('architecture').innerHTML = model.architecture.join(' <span>→</span> ');
+  const grids = model.layers.map(layer => layer.nBases - 3);
+  $('architecture-detail').textContent = `KAN · grid ${grids.join(' / ')}. Linear head: ${model.architecture.at(-1)} → ${model.head.bias.length}${model.actionType === 'continuous' ? ' · tanh' : ' · logits'}.`;
   inputPage = model.architecture[0] > 16 && selected.l === 0 ? Math.floor(selected.i / INPUT_PAGE_SIZE) : 0;
   $('network-intro').innerHTML = `${edges.length} learned edge curves.<br>Click a connection to edit it.`;
   $('network').setAttribute('aria-label', `Interactive ${model.architecture.join(' to ')} actor network`);
   $('network-key').innerHTML = model.architecture.map((_, l) => `<span>${l === 0 ? 'State' : l === model.layers.length ? 'Latent' : 'Hidden ' + l}</span>`).join('');
-  $('parameter-count').textContent = `${model.actorParameters} parameters`;
+  $('parameter-count').textContent = `${model.actorParameters.toLocaleString()} actor parameters`;
   const normalized = model.observationNormalization || model.observationScale?.some(x => x !== 1);
   $('model-description').textContent = `${model.layers.length} KAN ${model.layers.length === 1 ? 'layer feeds' : 'layers feed'} a fixed action head.${normalized ? ' Inputs use the saved observation normalization; curves show the processed inputs.' : ''} ${model.actionType === 'continuous' ? model.actionVector ? `${model.head.bias.length} actuator ${model.head.bias.length === 1 ? 'control uses' : 'controls use'} the saved action bounds.` : `The ${env.controlName} is limited to ±${model.torqueLimit}${env.controlUnit ? ' ' + env.controlUnit : ''}.` : 'The highest logit selects the action.'}`;
   inputNames = env.inputNames.map((name, i) => {

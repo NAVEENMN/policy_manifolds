@@ -1,0 +1,37 @@
+{
+  "environment": "Walker2d-v5",
+  "trial": "a2_g5_s1_attempt001",
+  "source": "results/Walker2d-v5/trials/a2_g5_s1_attempt001",
+  "architecture": [
+    17,
+    2
+  ],
+  "head_architecture": [
+    2,
+    6
+  ],
+  "actor_parameters": 324,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Target met \u00b7 one training seed",
+    "score": 4204.461989552975,
+    "score_label": "100 validation episodes",
+    "target": 4000.0,
+    "target_met": true,
+    "trial": "a2_g5_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 5,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 1,
+    "detail": "Target 4000 \u00b7 seed 1 \u00b7 grid 5 \u00b7 1,950,000 checkpoint steps. 1/3 training seeds passed at this grid. Not reliably solved across seeds.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "d457735e405361d8c0f3937663cd058f19d32cf8ab11f906bbad50eeb68e576b",
+    "best_model.zip": "175487058012c2ffc53524612fe5b303eab4161ad14b5e7b67f34289184f9a26",
+    "best_actor.json": "ec36593928268f0563f847b65a7471c607ea0323bd2a596e92cbbf28ecc29f37",
+    "best_normalization.pkl": "6fcf950cd968adfa5558d2396650f661a14966f338bc6883b07d284cf98c6aa6",
+    "best_validation.json": "5f778487b7272f53a02936441a4e1b4c149231e15f2363286a26057e57a93ea6",
+    "learning_curve.csv": "e59aa3499ce2e85239f1a6591facbf26f28a74e1e98bf9cf7b0200e27229e800"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "training_steps": 1950000,
+  "seconds": 14114.753,
+  "episodes": 20,
+  "mean_return": 4209.06508243382,
+  "std_return": 31.291413642546917,
+  "min_return": 4159.6763170957565,
+  "max_return": 4264.593251883984,
+  "mean_length": 1000.0,
+  "return_ci95_low": 4194.994746889502,
+  "stable_rate": null
+}

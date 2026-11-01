@@ -375,12 +375,20 @@
     "epsilon": 1e-08,
     "clip": 10.0
   },
+  "checkpoint_sha256": "7e73a2ffddeb7cf219664d433fb393b3d0a0128b2ee473266a36bb1a33d766d1",
   "demo": {
     "algorithm": "SAC",
     "status": "Below target",
-    "score": 1028.3047485595941,
+    "score": 3428.2444399183987,
     "score_label": "100 validation episodes",
     "target": 3800.0,
-    "detail": "Selected a1-1_g1_s0_attempt001; 1,000,000 training steps."
+    "target_met": false,
+    "trial": "a2_g2_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 2,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target 3800 \u00b7 seed 1 \u00b7 grid 2 \u00b7 950,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
   }
 }

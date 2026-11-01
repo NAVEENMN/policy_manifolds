@@ -1,0 +1,49 @@
+{
+  "environment": "Hopper-v5",
+  "observation_shape": [
+    11
+  ],
+  "observation_dtype": "float64",
+  "observation_labels": [
+    "qpos feature 1",
+    "qpos feature 2",
+    "qpos feature 3",
+    "qpos feature 4",
+    "qpos feature 5",
+    "qvel feature 1",
+    "qvel feature 2",
+    "qvel feature 3",
+    "qvel feature 4",
+    "qvel feature 5",
+    "qvel feature 6"
+  ],
+  "observation_structure": {
+    "skipped_qpos": 1,
+    "qpos": 5,
+    "qvel": 6
+  },
+  "action_labels": [
+    "Actuator 1",
+    "Actuator 2",
+    "Actuator 3"
+  ],
+  "action_space": "Box(-1.0, 1.0, (3,), float32)",
+  "action_dimension": 3,
+  "max_episode_steps": 1000,
+  "gym_reward_threshold": 3800.0,
+  "action_low": [
+    -1.0,
+    -1.0,
+    -1.0
+  ],
+  "action_high": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "simulation_dt": 0.008,
+  "frame_skip": 4,
+  "mujoco_xml": "hopper.xml",
+  "mujoco_xml_sha256": "3ce93a055ffdcd83c0c701d2400768e40d2cbb9532f3c4ae33377c27f8b39f9e",
+  "target": 3800.0
+}

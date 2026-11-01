@@ -53,3 +53,9 @@
 .comparison-table{width:100%;min-width:700px;border-collapse:collapse;font-size:12px;line-height:1.6;text-align:left}.comparison-table caption{text-align:left}.comparison-table th,.comparison-table td{padding:13px 14px;border-bottom:1px solid #2d4033;white-space:nowrap}.comparison-table thead{background:#223128;color:#b6d3c0}.comparison-table thead th{font-size:10px;font-weight:600;letter-spacing:.25px}.comparison-table tbody th{font-weight:500;color:#d3e2d8}.comparison-table tbody tr:last-child>*{border-bottom:0}.comparison-table tbody tr:nth-child(even){background:#1b271f}.comparison-table .architecture-value{font-family:ui-monospace,SFMono-Regular,monospace;font-size:11px;color:#b8cec0}.comparison-table .score{text-align:right;font-variant-numeric:tabular-nums}.comparison-table .kan-score{color:var(--mint);font-weight:600}.comparison-table .unreported{color:#82998a}.comparison-table small{margin-left:5px;font-size:9px;color:#9fbaaa}.comparison-failed{display:inline-block;padding:2px 7px;border-radius:5px;background:#3b3022;color:#e3bf94;font-size:10px}
 #comparison .comparison-notes{margin-top:16px}#comparison .comparison-notes p{font-size:11px;line-height:1.65;margin-top:8px}#comparison .comparison-notes strong{color:#bed3c5}
 @media(max-width:760px){#comparison{padding:26px 18px}#comparison h2{font-size:24px}.comparison-table th,.comparison-table td{padding:11px 12px}.comparison-table-wrap{margin-top:16px}}
+
+.architecture-detail { margin: -4px 0 16px; color: var(--muted, #8a9b96); font-size: 11px; line-height: 1.6; }
+.saved-result details { margin-top: 8px; font-size: 11px; line-height: 1.6; }
+.saved-result summary { cursor: pointer; width: fit-content; }
+.saved-result details p { margin: 6px 0; overflow-wrap: anywhere; }
+.saved-result a { color: inherit; text-underline-offset: 3px; }

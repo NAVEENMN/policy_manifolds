@@ -1,0 +1,37 @@
+{
+  "environment": "Humanoid-v5",
+  "trial": "a2_g1_s0_attempt001",
+  "source": "results/Humanoid-v5/trials/a2_g1_s0_attempt001",
+  "architecture": [
+    348,
+    2
+  ],
+  "head_architecture": [
+    2,
+    17
+  ],
+  "actor_parameters": 3531,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 5534.373414114043,
+    "score_label": "100 validation episodes",
+    "target": 6000.0,
+    "target_met": false,
+    "trial": "a2_g1_s0_attempt001",
+    "training_seed": 0,
+    "grid_size": 1,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target 6000 \u00b7 seed 0 \u00b7 grid 1 \u00b7 1,700,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "89c265948f0129612964e2326c0ff3d1344b316074280c64bd90904f61d4a4b1",
+    "best_model.zip": "6fdc3572c194745b522628a85b4a188c6e91f86ea29a2260d9807813a3a5221c",
+    "best_actor.json": "e694e17110b1772385921cbe10d00af2fdf2283f7825289a044bf97fd9d83f25",
+    "best_normalization.pkl": "67ce6008bc396eb819b82891042afdc765f6f40258575a50871fcd728c103e91",
+    "best_validation.json": "3b5e1ba09e5dac72c32e784dd79f2789022f64b16e7ee8ba4495488fdad3bacb",
+    "learning_curve.csv": "7f85022531e63c60442dcdce66703b670c1be978bf89924181770b4d6a91d7fb"
+  }
+}

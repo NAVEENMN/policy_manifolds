@@ -1,0 +1,37 @@
+{
+  "environment": "Swimmer-v5",
+  "trial": "a2_g5_s1_attempt001",
+  "source": "results/Swimmer-v5/trials/a2_g5_s1_attempt001",
+  "architecture": [
+    8,
+    2
+  ],
+  "head_architecture": [
+    2,
+    2
+  ],
+  "actor_parameters": 150,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 116.3241103929402,
+    "score_label": "100 validation episodes",
+    "target": 360.0,
+    "target_met": false,
+    "trial": "a2_g5_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 5,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target 360 \u00b7 seed 1 \u00b7 grid 5 \u00b7 1,000,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "1ab597c34c73553cd834c315d381c703b76b112c92e4675716ed3b7fe8136b99",
+    "best_model.zip": "fac5d9e6d174b536a77b150dbe118a5d48dd61b6e77680423d17a389030b3d07",
+    "best_actor.json": "435b57b03dd4f63d4b8a199ea60e49831e8759635bc516de0d96b4545658a10d",
+    "best_normalization.pkl": "c8eb6eca0073e355fafabe081c59896fcc15979c3a39d411d38bde7b9d14ec45",
+    "best_validation.json": "cfaaf9649dad4a9057cca6a7ad5efe75b050fbb900cf887378e642b85c91006b",
+    "learning_curve.csv": "af47531523bbd2cae2d4e911aa5c31a49ebf08d71be30358e3eb2c05947c514b"
+  }
+}

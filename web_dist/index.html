@@ -18,6 +18,7 @@
       <div id="network-content">
       <div class="eyebrow">THE POLICY</div><h2>KAN Policy<br>Neural Networks</h2>
       <div class="architecture" id="architecture">4 <span>→</span> 2 <span>→</span> 2</div>
+      <p class="architecture-detail" id="architecture-detail">KAN layers · linear action head follows</p>
       <p class="muted intro" id="network-intro">12 learned edge curves.<br>Click a connection to edit it.</p>
       <svg id="network" viewBox="0 0 224 270" aria-label="Interactive 4 to 2 to 2 actor network"></svg>
       <div id="network-key" class="network-key"><span>State</span><span>Hidden</span><span>Latent</span></div>
@@ -29,7 +30,7 @@
     </aside>
     <main>
       <div class="main-heading"><div><div class="eyebrow">Interactive Reinforcement Learning <span class="policy-notation" aria-label="pi of a given s">π(a|s)</span> lab</div><h1>Change an edge in the neural network.<br><span>See how the RL agent's behavior changes.</span></h1></div><div class="policy-summary"><span class="chip" id="environment-chip">CartPole-v1</span><div class="algorithm-summary"><span class="eyebrow">TRAINING ALGORITHM</span><strong id="algorithm-name" aria-live="polite">PPO — Proximal Policy Optimization</strong></div></div></div>
-      <section id="saved-result" class="saved-result" hidden aria-label="Saved model evaluation"><div><strong id="saved-status"></strong><span id="saved-score"></span></div><p id="saved-detail"></p></section>
+      <section id="saved-result" class="saved-result" hidden aria-label="Saved model evaluation"><div><strong id="saved-status"></strong><span id="saved-score"></span></div><p id="saved-detail"></p><details id="saved-provenance" hidden><summary>Checkpoint &amp; learning curve</summary><p id="saved-trial"></p><p>Selected by validation return; this is not a held-out test result.</p><a id="learning-curve-link" download>Learning curve CSV ↗</a> · <a href="results/width2_trials.csv" download>All trial results CSV ↗</a></details></section>
       <section id="runtime-notice" class="runtime-notice" hidden role="status"><strong id="runtime-title">Simulation</strong><p id="runtime-detail"></p><button id="retry-runtime" class="quiet">Retry connection</button></section>
       <section id="missing-policy" class="missing-policy" hidden aria-live="polite">
         <span class="empty-icon" id="missing-icon" aria-hidden="true">⌁</span>
@@ -93,12 +94,12 @@
   </dialog>
   <dialog id="comparison" aria-labelledby="comparison-title" aria-describedby="comparison-intro">
     <button id="close-comparison" class="close" aria-label="Close KAN versus MLP comparison" autofocus>×</button>
-    <div class="eyebrow">SOLVED ENVIRONMENTS</div>
+    <div class="eyebrow">TARGET-PASSING CHECKPOINTS</div>
     <h2 id="comparison-title">KAN vs MLP</h2>
-    <p id="comparison-intro">Reported experiment results for eight environments where a KAN policy met the score target. Higher returns are better, including for negative scores.</p>
+    <p id="comparison-intro">Reported experiment results for nine environments where at least one KAN policy met the score target. Higher returns are better, including for negative scores.</p>
     <div class="comparison-table-wrap" role="region" aria-label="KAN versus MLP results" tabindex="0">
       <table class="comparison-table" aria-describedby="comparison-notes">
-        <caption class="sr-only">Reported KAN and MLP architectures and returns for solved environments</caption>
+        <caption class="sr-only">Reported KAN and MLP architectures and returns for target-passing checkpoints</caption>
         <thead><tr><th scope="col">Environment</th><th scope="col">KAN architecture</th><th scope="col">MLP architecture</th><th scope="col" class="score">KAN score</th><th scope="col" class="score">MLP score</th></tr></thead>
         <tbody>
           <tr><th scope="row">InvertedPendulum-v5</th><td class="architecture-value">4 → 1</td><td class="unreported">—</td><td class="score kan-score">1,000</td><td class="score unreported">—</td></tr>
@@ -109,10 +110,12 @@
           <tr><th scope="row">CartPole-v1</th><td class="architecture-value">4 → 2 → 2</td><td class="architecture-value">4 → 16 → 16</td><td class="score kan-score">500</td><td class="score">500</td></tr>
           <tr><th scope="row">MountainCar-v0</th><td class="architecture-value">2 → 8 → 8</td><td class="unreported">—</td><td class="score kan-score">−100.6</td><td class="score"><span class="comparison-failed">Failed</span></td></tr>
           <tr><th scope="row">LunarLander-v3</th><td class="architecture-value">8 → 8 → 8</td><td class="architecture-value">8 → 64 → 64</td><td class="score kan-score">268.7</td><td class="score">259.8</td></tr>
+          <tr><th scope="row">Walker2d-v5 <small>1 of 3 seeds at grid 5</small></th><td class="architecture-value">17 → 2</td><td class="unreported">—</td><td class="score kan-score">4,204.5</td><td class="score unreported">—</td></tr>
         </tbody>
       </table>
     </div>
     <div id="comparison-notes" class="comparison-notes">
+      <p>Walker2d's selected checkpoint scored 4,204.5 over 100 validation episodes; only 1 of 3 training seeds at grid 5 passed. This does not establish reliable solving across seeds.</p>
       <p><strong>Architectures:</strong> observation inputs followed by learned layer widths. Final linear action heads are omitted.</p>
       <p><strong>Failed:</strong> no tested MLP met the target in the reported experiment; no passing MLP architecture is listed. <strong>—:</strong> no result or passing architecture was reported.</p>
       <p>Reported by the project authors; independent reproduction is not documented. Training and evaluation settings differ, so this table does not establish that KANs are generally smaller or better than MLPs or simple controllers. The demo may load a different checkpoint.</p>

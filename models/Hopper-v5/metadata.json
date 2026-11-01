@@ -1,0 +1,37 @@
+{
+  "environment": "Hopper-v5",
+  "trial": "a2_g2_s1_attempt001",
+  "source": "results/Hopper-v5/trials/a2_g2_s1_attempt001",
+  "architecture": [
+    11,
+    2
+  ],
+  "head_architecture": [
+    2,
+    3
+  ],
+  "actor_parameters": 141,
+  "demo": {
+    "algorithm": "SAC",
+    "status": "Below target",
+    "score": 3428.2444399183987,
+    "score_label": "100 validation episodes",
+    "target": 3800.0,
+    "target_met": false,
+    "trial": "a2_g2_s1_attempt001",
+    "training_seed": 1,
+    "grid_size": 2,
+    "training_seeds_evaluated": 3,
+    "training_seeds_passed": 0,
+    "detail": "Target 3800 \u00b7 seed 1 \u00b7 grid 2 \u00b7 950,000 checkpoint steps. 0/3 training seeds passed at this grid.",
+    "selection": "Highest selection-validation mean return among complete exported 1D trials; no held-out test selection."
+  },
+  "files": {
+    "result.json": "6d835a0199a9716e2e15b981a3c894e325025cc7a926abdf271f1e00d1f9eff3",
+    "best_model.zip": "7e73a2ffddeb7cf219664d433fb393b3d0a0128b2ee473266a36bb1a33d766d1",
+    "best_actor.json": "2d62c6e9cc94fd94b4ba7943935f8714881551d3a8bcd7d6d914bcb6bd3d49c6",
+    "best_normalization.pkl": "decdeb32d41c780df70c35f2348cc74f9ec213e8036214213b88ebab6f17b49c",
+    "best_validation.json": "506d36f056cfe36b97b50e6bae07e43816471e4d92d40e2d9eac277c5ceddff9",
+    "learning_curve.csv": "868fd5442abe68c8c3f8932bb5976716358171f30dc8788ac3a7c1188ed4e811"
+  }
+}

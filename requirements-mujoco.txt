@@ -1,0 +1,5 @@
+# MuJoCo-only demo installation; training libraries are unnecessary for playback.
+gymnasium[mujoco]==1.1.1
+mujoco==3.2.7
+imageio==2.37.2
+numpy>=1.24,<3
