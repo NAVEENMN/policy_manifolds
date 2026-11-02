@@ -59,3 +59,5 @@
 .saved-result summary { cursor: pointer; width: fit-content; }
 .saved-result details p { margin: 6px 0; overflow-wrap: anywhere; }
 .saved-result a { color: inherit; text-underline-offset: 3px; }
+
+.site-footer{padding:20px 26px;background:var(--panel);border-top:1px solid var(--line);text-align:center;font-size:11px;color:#8fa497;line-height:1.8}.site-footer a{color:var(--accent);text-decoration:none}.site-footer a:hover{text-decoration:underline}.site-footer .muted{font-size:9px;margin-top:6px;max-width:600px;margin-left:auto;margin-right:auto}

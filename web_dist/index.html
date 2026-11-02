@@ -3,8 +3,44 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#171b1a">
-  <meta name="description" content="Reshape a trained KAN policy with draggable spline control points and watch Classic Control, Box2D, and MuJoCo agents respond live.">
-  <title>Policy Manifolds · Interactive Reinforcement Learning π(a|s) lab</title>
+  <meta name="description" content="Interactive lab for interpretable reinforcement learning with Kolmogorov-Arnold Network (KAN) policies. Edit learned B-spline activation curves and watch CartPole, Pendulum, MuJoCo, and Box2D agents respond live. Minimal KAN controllers with 22 to 1,188 parameters replace standard MLPs with 3-800x fewer parameters.">
+  <meta name="keywords" content="Kolmogorov-Arnold Networks, KAN, reinforcement learning, interpretable AI, policy visualization, B-spline, MuJoCo, CartPole, Pendulum, neural network interpretability, InKAN, policy manifolds">
+  <meta name="author" content="Naveen Mysore">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://policymanifolds.com/">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://policymanifolds.com/">
+  <meta property="og:title" content="Policy Manifolds - Interactive Interpretable RL with KAN Policies">
+  <meta property="og:description" content="Reshape trained KAN policies with draggable spline control points and watch RL agents respond live. Controllers as small as 22 parameters solve standard benchmarks.">
+  <meta property="og:site_name" content="Policy Manifolds">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Policy Manifolds - Interactive Interpretable RL with KAN Policies">
+  <meta name="twitter:description" content="Edit learned B-spline curves on minimal KAN controllers and watch CartPole, Pendulum, and MuJoCo agents respond in real time.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Policy Manifolds",
+    "description": "Interactive lab for interpretable reinforcement learning with Kolmogorov-Arnold Network (KAN) policies. Edit learned B-spline activation curves and watch agents respond live.",
+    "url": "https://policymanifolds.com",
+    "applicationCategory": "Science, Machine Learning",
+    "author": {
+      "@type": "Person",
+      "name": "Naveen Mysore",
+      "url": "https://naveenmn.github.io/"
+    },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "keywords": "KAN, Kolmogorov-Arnold Networks, reinforcement learning, interpretable AI, B-spline, policy visualization"
+  }
+  </script>
+
+  <title>Policy Manifolds - Interactive Interpretable RL with KAN Policies</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -122,6 +158,10 @@
     </div>
   </dialog>
   <dialog id="guide"><button id="close-help" class="close" aria-label="Close guide">×</button><div class="eyebrow">A HANDS-ON EXPERIMENT</div><h2>Reshape a decision.</h2><ol><li>Choose <strong>an environment with a saved policy</strong> from the dropdown in the top bar, then press <strong>Run policy</strong>.</li><li>Select an edge in the network or one of the curve cards.</li><li>Drag a diamond up or down. You are changing a real spline coefficient; the next action uses the new curve.</li><li>Watch the simulation, next action, and progress trace. The dashed ghost keeps the original policy.</li><li>Use <strong>Restart</strong> for the same starting state, <strong>Undo</strong> to reverse an edit, or <strong>Restore trained policy</strong> to reset everything.</li></ol><p>Try a middle control point on an angle or velocity edge. CartPole chooses between two pushes; Pendulum applies continuous torque. Acrobot and MountainCar choose among three actions. Use “Compare 20 episodes” for a broader comparison.</p><p class="muted">The checkpoint’s actor runs in your browser. Classic Control physics runs in the browser; Box2D and MuJoCo use the local Python server. Larger networks have an input-group selector, and every actuator has its own control indicator. Saved evaluation badges distinguish target-passing, below-target, and incomplete runs. Each environment loads its own saved actor; Pendulum normalizes angular velocity by 8 and maps its action head through tanh to ±2 N·m. InvertedPendulum uses its saved observation normalization and continuous cart controls from −3 to +3. The action head stays fixed. Diamonds edit B-spline coefficients at fixed x positions; these are not Bézier tangent handles.</p></dialog>
+  <footer class="site-footer" role="contentinfo">
+    <p>Built by <a href="https://naveenmn.github.io/" target="_blank" rel="noopener">Naveen Mysore</a> · <a href="https://arxiv.org/abs/2609.01956" target="_blank" rel="noopener">InKAN Paper</a> · <a href="https://github.com/NAVEENMN/policy_manifolds.git" target="_blank" rel="noopener">GitHub</a></p>
+    <p class="muted">Interpretable reinforcement learning with Kolmogorov-Arnold Network policies. Controllers as small as 22 parameters solve standard benchmarks with learned B-spline activations.</p>
+  </footer>
   <script type="module" src="./app.mjs"></script>
 </body>
 </html>
