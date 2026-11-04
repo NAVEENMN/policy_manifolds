@@ -3,6 +3,7 @@ import {environments, environmentCatalog, environmentRollout} from './environmen
 import {createPolicyLoader} from './policy-loader.mjs';
 import {mujocoRequest, simulationRequest} from './mujoco-client.mjs';
 import {drawSimulationScene} from './simulation-scene.mjs';
+import {Simulation3D} from './simulation-3d.mjs';
 
 const $ = id => document.getElementById(id);
 const algorithmNames = {PPO: 'Proximal Policy Optimization', SAC: 'Soft Actor-Critic'};
@@ -23,6 +24,7 @@ let accumulator = 0, lastFrame = 0, endSince = null, lastPaint = 0, resetSeed = 
 let view = {xmin: -1.65, xmax: 1.65, ymin: -1, ymax: 1};
 const PLOT = {x: 48, y: 18, w: 413, h: 224};
 let toastTimeout;
+let sceneViewer = null;
 
 function toast(message) {
   $('toast').textContent = message;
@@ -205,7 +207,7 @@ function resetEpisode(newSeed = false) {
   $('episode-label').textContent = `Episode ${String(episode).padStart(2, '0')}`;
   $('scene-message').hidden = true;
   updateStats(); drawScene(); drawHistory(); updateMarker();
-  if (env.session) connectRuntime(environmentVersion, runVersion);
+  if (env.remote) connectRuntime(environmentVersion, runVersion);
 }
 function advanceRun(run, policy, trace) {
   if (run.done) return;
@@ -351,6 +353,26 @@ function canvasContext(id) {
   return {ctx, w: rect.width, h: rect.height};
 }
 function drawScene() {
+  const use3D = env?.remote && env.id !== 'lunarlander';
+  const scene3d = live?.scene?.threeD;
+  $('scene-view-controls').hidden = !use3D;
+  // A separate canvas keeps WebGL and the Classic Control 2D contexts independent.
+  if (use3D && scene3d) {
+    if (!sceneViewer) sceneViewer = new Simulation3D($('scene-3d'), drawScene);
+    $('scene-3d').hidden = false;
+    if (sceneViewer.render(scene3d, baseline?.scene?.threeD, $('ghost').checked)) {
+      $('scene').hidden = true;
+      $('scene-view-status').textContent = 'MuJoCo · 3D';
+      $('camera-follow').checked = sceneViewer.camera.follow;
+      for (const key of ['camera-orbit','camera-side','camera-top','camera-reset','camera-follow']) $(key).disabled = false;
+      return;
+    }
+  }
+  $('scene').hidden = false; $('scene-3d').hidden = true;
+  if (use3D) {
+    $('scene-view-status').textContent = scene3d ? 'MuJoCo · 2D fallback' : 'MuJoCo · connecting 3D view…';
+    for (const key of ['camera-orbit','camera-side','camera-top','camera-reset','camera-follow']) $(key).disabled = true;
+  }
   if (env.session) {
     const {ctx, w, h} = canvasContext('scene');
     drawSimulationScene(ctx, w, h, live, baseline, $('ghost').checked);
@@ -774,6 +796,11 @@ async function connectRuntime(version, currentRun = runVersion) {
       [live, baseline].forEach((run, i) => {run.state = result.runs[i].state; run.scene = result.runs[i].scene;});
       samples = [env.metric(live.state)]; baseSamples = [env.metric(baseline.state)];
       updateStats(); updateMarker(); drawScene(); drawHistory();
+    } else {
+      const geometry = await mujocoRequest('scene', {states: [live.state, baseline.state]});
+      if (version !== environmentVersion || currentRun !== runVersion) return;
+      [live, baseline].forEach((run, i) => { run.scene = geometry.scenes[i]; });
+      drawScene();
     }
     runtimeReady = true; $('runtime-notice').hidden = true;
     for (const name of ['play', 'step', 'evaluate']) $(name).disabled = false;
@@ -789,6 +816,7 @@ async function switchEnvironment(id, force = false) {
   dragging = null; environmentVersion++; runVersion++; stepPending = null; running = false; accumulator = 0;
   const version = environmentVersion;
   env = environments[id]; original = policies.get(id); model = null; live = null; baseline = null;
+  $('scene-3d').hidden = true; $('scene').hidden = false; $('scene-view-controls').hidden = true;
   history.replaceState(null, '', '#' + id);
   runtimeReady = !env.remote; $('runtime-notice').hidden = true;
   inputShort = env.inputShort; inputNames = env.inputNames; units = env.units;
@@ -883,7 +911,7 @@ async function switchEnvironment(id, force = false) {
   $('last-result').textContent = env.description;
   $('evaluate').textContent = 'Compare 20 episodes ↗';
   resetEpisode(); fitView(); changed(); setRunning(false);
-  if (!env.session) connectRuntime(version);
+  // resetEpisode connects every remote simulator, including its initial 3D pose.
 }
 
 async function fingerprint(contents) {
@@ -911,6 +939,10 @@ async function readPolicy(definition) {
 function init() {
   for (const name of ['policy-content', 'network-content', 'editor-content']) $(name).inert = true;
   renderEnvironmentPicker(); wireUI();
+  for (const [id, preset] of [['camera-orbit','orbit'],['camera-side','side'],['camera-top','top']]) $(id).onclick = () => sceneViewer?.preset(preset);
+  $('camera-reset').onclick = () => sceneViewer?.reset();
+  $('camera-follow').onchange = () => sceneViewer?.setFollow($('camera-follow').checked);
+  window.addEventListener('pagehide', () => { sceneViewer?.dispose(); sceneViewer = null; });
   $('retry-runtime').onclick = () => env.session ? resetEpisode() : connectRuntime(environmentVersion);
   window.addEventListener('hashchange', () => {
     const id = location.hash.slice(1);

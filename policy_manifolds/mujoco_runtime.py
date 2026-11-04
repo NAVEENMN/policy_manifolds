@@ -7,6 +7,7 @@ from pathlib import Path
 import shlex
 import sys
 import threading
+from .geometry3d import scene3d
 
 
 class RuntimeUnavailable(RuntimeError):
@@ -94,8 +95,24 @@ class InvertedPendulumRuntime:
                     output.append(None); continue
                 self._set_state(item['state'])
                 state, reward, terminated, _, _ = self._env.unwrapped.step([max(-3., min(3., item['action']))])
-                output.append({'state': state.tolist(), 'reward': reward, 'terminated': bool(terminated)})
+                output.append({'state': state.tolist(), 'reward': reward, 'terminated': bool(terminated),
+                               'scene': {'threeD': scene3d(self._env.model, self._env.data, 'invertedpendulum')}})
             return {'runs': output}
+
+    def scene(self, payload):
+        """Describe initial/restarted poses without taking a simulation step."""
+        starts = payload.get('states')
+        if not isinstance(starts, list) or not 1 <= len(starts) <= 2:
+            raise ValueError('Expected one or two initial states.')
+        for state in starts:
+            state_vector(state)
+        with self.lock:
+            self._ready()
+            scenes = []
+            for state in starts:
+                self._set_state(state)
+                scenes.append({'threeD': scene3d(self._env.model, self._env.data, 'invertedpendulum')})
+            return {'scenes': scenes}
 
     def compare(self, payload):
         starts = payload.get('starts')

@@ -43,6 +43,7 @@ class AppHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         operation = {'/api/invertedpendulum/step': self.server.mujoco_runtime.step,
+                     '/api/invertedpendulum/scene': self.server.mujoco_runtime.scene,
                      '/api/invertedpendulum/compare': self.server.mujoco_runtime.compare}.get(urlsplit(self.path).path)
         parts = urlsplit(self.path).path.strip('/').split('/')
         if len(parts) == 4 and parts[:2] == ['api', 'simulation'] and parts[3] in ('reset', 'step', 'compare', 'release'):

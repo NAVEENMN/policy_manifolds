@@ -34,3 +34,6 @@ Thumbs.db
 
 # Automatic local update backups
 .production-update-backup/
+
+# Local 3D-viewer update backups
+.viewer-update-backup/

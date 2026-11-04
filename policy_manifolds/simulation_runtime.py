@@ -17,6 +17,7 @@ import time
 
 from .paths import SIMULATIONS
 from .mujoco_runtime import RuntimeUnavailable
+from .geometry3d import scene3d
 
 
 def browser_actor(data, environment):
@@ -79,6 +80,7 @@ def scene_geometry(env, key):
     elif key == 'inverteddoublependulum': center = np.array([data.qpos[0], .65]); span = 3.
     elif axes == [0, 2]: center[1] = .9
     return {'kind': 'mujoco', 'view': 'top' if axes == [0, 1] else 'side',
+            'threeD': scene3d(model, data, key),
             'shapes': shapes, 'center': center.tolist(), 'span': span}
 
 

@@ -39,6 +39,31 @@ after updating files. Use `--port 7862` to run alongside another app. Dependenci
 are loaded lazily; unavailable simulators show a Retry connection message while
 curve editing remains available.
 
+## 3D MuJoCo viewer
+
+The nine MuJoCo demos render their existing simulator geometry in a lit 3D view
+with shadows and the original-policy ghost. This is a visualization change:
+physics, reset states, observations, rewards, action scaling, trained policies,
+and curve editing use the existing implementations and saved models.
+
+- Drag to orbit; scroll or pinch to zoom; Shift-drag or right-drag to pan.
+- Use **Orbit**, **Side**, or **Top** for preset views; **↺ Camera** resets the view.
+- **Follow** keeps the camera centered on the live agent.
+- Focus the scene for keyboard controls: arrow keys rotate, `+`/`−` zoom, and
+  `Home` resets the camera.
+
+The renderer is bundled JavaScript/WebGL 2 and needs no new packages or CDN.
+If WebGL 2 is unavailable, the original 2D view remains available. Classic
+Control and Box2D retain their existing viewers. Physics still runs in the
+Python server; rendering and editable policy inference run in the browser.
+
+Renderer and physics-isolation checks:
+
+```bash
+node tests/test_scene_3d.mjs
+python -m unittest discover -s tests -p test_geometry3d.py -v
+```
+
 ## Current models
 
 Four Classic Control, LunarLander, and nine MuJoCo actors are bundled (14 demos).
