@@ -1,0 +1,15 @@
+# HalfCheetah-v5: 17 obs -> 1 hidden -> Continuous(6)
+environment: HalfCheetah-v5
+algorithm: SAC
+architecture: [17, 1]
+grid_size: 1
+actor_params: 97
+target: 4800
+training_steps: 2_000_000
+learning_rate: 0.0003
+buffer_size: 300_000
+batch_size: 256
+gamma: 0.99
+tau: 0.005
+critic: [256, 256]
+result: 7582

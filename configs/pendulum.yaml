@@ -1,0 +1,14 @@
+# Pendulum-v1: 3 obs -> 1 hidden -> 1 latent -> Continuous(1)
+environment: Pendulum-v1
+algorithm: SAC
+architecture: [3, 1, 1]
+grid_size: 2
+actor_params: 26
+target: -200
+training_steps: 200_000
+learning_rate: 0.0003
+buffer_size: 200_000
+batch_size: 256
+gamma: 0.99
+tau: 0.005
+result: -184.8

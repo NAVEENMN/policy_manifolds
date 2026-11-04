@@ -1,0 +1,16 @@
+# Acrobot-v1: 6 obs -> 2 hidden -> Discrete(3)
+environment: Acrobot-v1
+algorithm: PPO
+architecture: [6, 2]
+grid_size: 2
+actor_params: 81
+target: -100
+training_steps: 500_000
+learning_rate: 0.0003
+batch_size: 64
+n_steps: 2048
+n_epochs: 10
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+result: -84.1

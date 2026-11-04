@@ -1,0 +1,14 @@
+# InvertedDoublePendulum-v5: 9 obs -> 1 hidden -> Continuous(1)
+environment: InvertedDoublePendulum-v5
+algorithm: SAC
+architecture: [9, 1]
+grid_size: 1
+actor_params: 47
+target: 9100
+training_steps: 200_000
+learning_rate: 0.0003
+buffer_size: 200_000
+batch_size: 256
+gamma: 0.99
+tau: 0.005
+result: 9359.9
